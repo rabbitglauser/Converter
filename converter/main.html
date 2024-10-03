@@ -1,3 +1,4 @@
+<!-- creating a number converter(decimal, binary, octal and hex) in HTML javascript and css  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +59,81 @@
 </div>
 
 <script>
+    /**
+     * Converts a number from a given base to decimal.
+     * @param {string} inputNumber - The number to convert, represented as a string.
+     * @param {number} base - The base of the input number (e.g., 2 for binary, 16 for hexadecimal).
+     * @returns {number} - The decimal equivalent of the input number.
+     */
+    function convertToDecimal(inputNumber, base) {
+        return [...inputNumber].reverse().reduce((acc, digit, index) => {
+            digit = digit.toLowerCase();
+            // Converts alphanumeric character to its numeric value
+            let value = digit >= 'a' ? digit.charCodeAt(0) - 'a'.charCodeAt(0) + 10 : digit - '0';
+            return acc + value * Math.pow(base, index);
+        }, 0);
+    }
+
+    /**
+     * Converts a decimal number to a given base.
+     * @param {number} decimalValue - The decimal number to convert.
+     * @param {number} base - The target base (e.g., 2 for binary, 16 for hexadecimal).
+     * @returns {string} - The number in the target base, represented as a string.
+     */
+    function convertFromDecimal(decimalValue, base) {
+        let symbols = "0123456789abcdef";
+        let result = "";
+
+        // Special case for zero
+        if (decimalValue === 0) {
+            return "0";
+        }
+
+        // Convert the decimal value to the target base
+        while (decimalValue > 0) {
+            result = symbols[decimalValue % base] + result;
+            decimalValue = Math.floor(decimalValue / base);
+        }
+
+        return result;
+    }
+
+    /**
+     * Main function to handle the conversion based on user input.
+     * Retrieves values from the input fields, performs the conversion,
+     * and displays the result.
+     */
     function convert() {
+        let inputNumber = document.getElementById("inputNumber").value;
+        let inputSystem = document.getElementById("inputSystem").value;
+        let outputSystem = document.getElementById("outputSystem").value;
+
+        let baseMap = {
+            "decimal": 10,
+            "binary": 2,
+            "octal": 8,
+            "hex": 16
+        };
+
+        const decimalValue = convertToDecimal(inputNumber, baseMap[inputSystem]);
+        let output = "";
+
+        // Convert the decimal value to the desired output system
+        if (outputSystem === "decimal") {
+            output = convertFromDecimal(decimalValue, 10);
+        } else if (outputSystem === "binary") {
+            output = convertFromDecimal(decimalValue, 2);
+        } else if (outputSystem === "octal") {
+            output = convertFromDecimal(decimalValue, 8);
+        } else if (outputSystem === "hex") {
+            output = convertFromDecimal(decimalValue, 16);
+        } else {
+            output = "Invalid output system!";
+        }
+
+        // Display the result in the HTML element with id "output"
+        document.getElementById("output").innerHTML = output;
+        console.log(`Converted number: ${output}`);
     }
 </script>
 </body>
