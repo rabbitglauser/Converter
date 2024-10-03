@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number System Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label,
+        select,
+        input,
+        button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        button {
+            cursor: pointer;
+        }
+        .output {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Number System Converter</h1>
+    <label for="inputNumber">Enter Number:</label>
+    <input type="text" id="inputNumber" placeholder="Enter number" />
+
+    <label for="inputSystem">Convert From:</label>
+    <select id="inputSystem">
+        <option value="decimal">Decimal</option>
+        <option value="binary">Binary</option>
+        <option value="octal">Octal</option>
+        <option value="hex">Hexadecimal</option>
+    </select>
+
+    <label for="outputSystem">Convert To:</label>
+    <select id="outputSystem">
+        <option value="decimal">Decimal</option>
+        <option value="binary">Binary</option>
+        <option value="octal">Octal</option>
+        <option value="hex">Hexadecimal</option>
+    </select>
+
+    <button onclick="convert()">Convert</button>
+
+    <div class="output" id="output"></div>
+</div>
+
+<script>
+    function convert() {
+    }
+</script>
+</body>
+</html>
